@@ -1,6 +1,7 @@
 package com.bootcamp.java.activoempresarial.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,13 +20,17 @@ public class Constantes {
 
     public static final Double MaintenanceCost = 0.0;
 
-    public static final String WebClientUriMSCliente = "http://localhost:8080/v1/client";
+    @Value("${container.name.gateway:localhost}")
+    private static final String hostGateway = "ms-gateway";
+    //public static final String hostGateway = "localhost";
 
-    public static final String WebClientUriMSProducto = "http://localhost:8080/v1/product";
+    public static final String WebClientUriMSCliente = "http://" + hostGateway + ":8080/v1/client";
 
-    public static final String WebClientUriMSPasivoCuentaCorriente = "http://localhost:8080/v1/pasivocuentacorriente";
+    public static final String WebClientUriMSProducto = "http://" + hostGateway + ":8080/v1/product";
 
-    public static final String WebClientUriMSPasivoCuentaCorrienteTrx = "http://localhost:8080/v1/activoempresarial/transaction";
+    public static final String WebClientUriMSPasivoCuentaCorriente = "http://" + hostGateway + ":8080/v1/pasivocuentacorriente";
+
+    public static final String WebClientUriMSPasivoCuentaCorrienteTrx = "http://" + hostGateway + ":8080/v1/activoempresarial/transaction";
 
     public static final Integer TransferenciasPropiaCuenta = 1;
 
