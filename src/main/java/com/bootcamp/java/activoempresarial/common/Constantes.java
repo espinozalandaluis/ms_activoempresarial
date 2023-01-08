@@ -1,12 +1,16 @@
 package com.bootcamp.java.activoempresarial.common;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.Date;
 
 @Slf4j
+@AllArgsConstructor
+@Component
 public class Constantes {
     public static final Integer ClientTypePersonal = 1;
     public static final Integer ProductTypePasivo = 1;
@@ -20,18 +24,31 @@ public class Constantes {
 
     public static final Double MaintenanceCost = 0.0;
 
-    @Value("${container.name.gateway:localhost}")
-    private static final String hostGateway = "ms-gateway";
-    //public static final String hostGateway = "localhost";
+    public static String webClientUriMSCliente;
 
-    public static final String WebClientUriMSCliente = "http://" + hostGateway + ":8080/v1/client";
+    @Value("${SERVER_GATEWAY:localhost}")
+    public void setwebClientUriMSCliente(String SERVER_GATEWAY) {
+        Constantes.webClientUriMSCliente = "http://" + SERVER_GATEWAY + ":8080/v1/client";
+    }
+    public static String webClientUriMSProducto = "";
 
-    public static final String WebClientUriMSProducto = "http://" + hostGateway + ":8080/v1/product";
+    @Value("${SERVER_GATEWAY:localhost}")
+    public void setWebClientUriMSProducto(String SERVER_GATEWAY) {
+        Constantes.webClientUriMSProducto = "http://" + SERVER_GATEWAY + ":8080/v1/product";
+    }
 
-    public static final String WebClientUriMSPasivoCuentaCorriente = "http://" + hostGateway + ":8080/v1/pasivocuentacorriente";
+    public static String webClientUriMSPasivoCuentaCorriente = "";
+    public static String webClientUriMSPasivoCuentaCorrienteTrx = "";
 
-    public static final String WebClientUriMSPasivoCuentaCorrienteTrx = "http://" + hostGateway + ":8080/v1/activoempresarial/transaction";
+    @Value("${SERVER_GATEWAY:localhost}")
+    public void setWebClientUriMSPasivoCuentaCorriente(String SERVER_GATEWAY) {
+        Constantes.webClientUriMSPasivoCuentaCorriente = "http://" + SERVER_GATEWAY + ":8080/v1/pasivocuentacorriente/getByAccountNumber";
+    }
 
+    @Value("${SERVER_GATEWAY:localhost}")
+    public void setWebClientUriMSPasivoCuentaCorrienteTrx(String SERVER_GATEWAY) {
+        Constantes.webClientUriMSPasivoCuentaCorrienteTrx = "http://" + SERVER_GATEWAY + ":8080/v1/pasivocuentacorriente/externalTransaction";
+    }
     public static final Integer TransferenciasPropiaCuenta = 1;
 
     public static final Integer TipoTrxDeposito = 1;
